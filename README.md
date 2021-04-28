@@ -1,5 +1,5 @@
 # @umajs/plugin-react-ssr
-> 基于Umajs提供React服务端渲染模式开发插件，可以在`controller`和`middleware`中灵活使用react页面组件进行服务端渲染。
+> 针对Umajs提供React服务端渲染模式的开发插件，可以在`controller`和`middleware`中灵活使用react页面组件进行服务端渲染。插件基于[mini-next](https://github.com/dazjean/mini-next)进行封装；
 
 # 特性
 - 支持多页面组件，各个页面构建bundle单独打包
@@ -47,7 +47,7 @@ type typeProps = {
     say:string
 }
 export default function (props:typeProps){
-     const {say} = this.props;
+     const {say} = props;
     return (
         <div className ='ts-demo' >{say}</div>
     )
@@ -119,4 +119,17 @@ Uma.app.use(async(ctx,next)=>{
         ctx.reactView('error',{msg:e.stack},{cache:false})
     }
 })
+```
+
+
+# 部署
+> 在部署生产环境之前，需要提前编译好客户端bundle文件，否则线上首次访问时会耗时比较长，影响用户体验。编译脚本命令为`npx mininext build true`
+```
+"scripts": {
+    "dev": "ts-node-dev --respawn src/app.ts",
+    "build": "tsc && npx mininext build true",
+    "prepublish": "npm run build",
+    "prod": "node app/app.js --production"
+  },
+
 ```

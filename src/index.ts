@@ -1,4 +1,4 @@
-import { IContext, TPluginConfig, TPlugin, Result as R, Uma } from '@umajs/core';
+import { IContext, TPlugin, Result as R, Uma } from '@umajs/core';
 import * as MiniNext from 'mini-next';
 
 interface IReactViewParms{
@@ -21,15 +21,16 @@ export class Result extends R {
 const NODE_ENV = (process.env && process.env.NODE_ENV) || 'development';
 let MiniNextInstance;
 
-let opt = Uma.config?.ssr || {}; // ssr.config.ts
-const reactSsrPlugin = <TPluginConfig>Uma.config?.plugin['react-ssr'];
+/** 插件配置读取放到了mini-next框架中进行兼容，在生产环境部署前构建阶段不会执行插件 */
+// let opt = Uma.config?.ssr || {}; // ssr.config.ts
+// const reactSsrPlugin = <TPluginConfig>Uma.config?.plugin['react-ssr'];
 
-if (reactSsrPlugin?.options) {
-    opt = reactSsrPlugin.options;
-}
+// if (reactSsrPlugin?.options) {
+//     opt = reactSsrPlugin.options;
+// }
 
 try {
-    MiniNextInstance = new MiniNext(Uma.app, NODE_ENV === 'development', false, opt);
+    MiniNextInstance = new MiniNext(Uma.app, NODE_ENV === 'development', false);
 } catch (error) {
     console.error(error);
 }
