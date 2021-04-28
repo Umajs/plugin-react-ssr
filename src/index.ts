@@ -48,7 +48,9 @@ export default (): TPlugin => ({
         },
     },
     context: {
-        reactView: (viewName, initProps, options) => MiniNextInstance.render(this, viewName, initProps, options),
+        reactView(viewName, initProps, options) {
+            return MiniNextInstance.render(this, viewName, initProps, options);
+        },
     },
 
 });
