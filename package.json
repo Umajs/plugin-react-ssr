@@ -1,6 +1,6 @@
 {
   "name": "@umajs/plugin-react-ssr",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "umajs react ssr",
   "author": "zunyi_zjj@163.com",
   "license": "MIT",
@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "@umajs/core": "^1.2.1",
-    "mini-next": "^3.0.0-beta5"
+    "consolidate": "^0.16.0",
+    "mini-next": "^3.0.0-beta10"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",
