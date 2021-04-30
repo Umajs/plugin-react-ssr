@@ -30,7 +30,7 @@
   "dependencies": {
     "@umajs/core": "^1.2.1",
     "consolidate": "^0.16.0",
-    "mini-next": "^3.0.0-beta10"
+    "mini-next": "^3.0.0-beta11"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",
