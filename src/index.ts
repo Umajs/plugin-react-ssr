@@ -60,7 +60,7 @@ const renderView = async (ctx, viewName, initProps, options) => {
         const { map } = opts;
         const engineName = map?.html;
 
-        console.assert(engineName, '@umajs/plugin-views must be setting; eg====>  map:{html:ejs}');
+        console.assert(engineName, '@umajs/plugin-views must be setting; eg====>  map:{html:"nunjucks"}');
         const engine = engineSource[engineName];
         const state = { ...options, ...ctx.state || {}, ...initProps };
 

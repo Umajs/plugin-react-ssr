@@ -116,7 +116,7 @@ async(ctx,next)=>{
     try{
         await next()
     }catch(e){
-        ctx.reactView('error',{msg:e.stack},{cache:false})
+       return ctx.reactView('error',{msg:e.stack},{cache:false})
     }
 }
 ```
@@ -143,6 +143,34 @@ export default class APP extends Component {
 browserRouter() {
     return Result.reactView('browserRouter',{say:"hi,I am a ReactView"},{cache:true});
 }
+```
+
+
+- **html中使用模板引擎**
+> 在客户端html模板中如果需要使用模板引擎，需要依赖使用`@umajs/plugin-views`插件;建议和`nunjucks`搭配使用。[参考demo](https://github.com/Umajs/umajs-react-ssr/tree/master/client/pages/template)
+```js
+// plugin.config.ts
+views: {
+        enable: true,
+        name: 'views',
+        options: {
+            root: `${process.cwd()}/views`,
+            autoRender:true,
+            opts: {
+                map: { html: 'nunjucks' },
+            },
+        },
+    },
+
+// controller
+Result.reactView('template',{msg:"This is the template text！",title:'hi,umajs-react-ssr'},{cache:false});
+
+// html
+<body>
+    <div>{{title}}</div>
+    <div>{{msg}}</div>
+    <div id="app"></div>
+</body>
 ```
 
 # 部署

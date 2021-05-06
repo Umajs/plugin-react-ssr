@@ -1,6 +1,6 @@
 {
   "name": "@umajs/plugin-react-ssr",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "umajs react ssr",
   "author": "zunyi_zjj@163.com",
   "license": "MIT",
