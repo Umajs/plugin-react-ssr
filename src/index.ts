@@ -45,7 +45,7 @@ if (opt.hasOwnProperty('defaultRouter')) {
 }
 
 try {
-    MiniNextInstance = new MiniNext(Uma.app, NODE_ENV === 'development', defaultRouter);
+    MiniNextInstance = new MiniNext(Uma.app, NODE_ENV === 'development', defaultRouter, opt);
 } catch (error) {
     console.error(error);
 }
