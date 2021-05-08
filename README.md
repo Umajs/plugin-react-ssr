@@ -33,8 +33,8 @@
    - client # rootDir配置可修改
         - pages # 固定目录
             - home #页面名称 
-                - home.tsx #页面入口文件(需要和页面名称一致)
-                - home.scss
+                - index.tsx 
+                - index.scss
 ```
 
 - 创建react页面组件
