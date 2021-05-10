@@ -33,7 +33,7 @@
    - web # rootDir配置可修改
         - pages # 固定目录
             - home #页面名称 
-                - index.tsx
+                - index.tsx 
                 - index.scss
 ```
 
