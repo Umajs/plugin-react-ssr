@@ -20,7 +20,7 @@
         'react-ssr': {
             enable:true,
             options:{
-                rootDir:'client',
+                rootDir:'web',
                 ssr: true, // 全局开启服务端渲染
                 cache: false, // 全局使用服务端渲染缓存 开发环境设置true无效
             }
@@ -28,13 +28,13 @@
     };
 ```
 
-- 新建client目录结构
+- 新建web目录结构
 ```js
-   - client # rootDir配置可修改
+   - web # rootDir配置可修改
         - pages # 固定目录
             - home #页面名称 
-                - home.tsx #页面入口文件(需要和页面名称一致)
-                - home.scss
+                - index.tsx
+                - index.scss
 ```
 
 - 创建react页面组件
@@ -96,7 +96,7 @@ async(ctx,next)=>{
 - **browserRouter**使用
 > 在页面组件中使用react-router时，只能在controller中使用，切需要服务端对路由做支持。框架默认集成了BrowserRouter，无需开发者在页面组件中引入
 ```js
-// 页面组件 client/browserRouter/index.js 
+// 页面组件 web/browserRouter/index.js 
 export default class APP extends Component {
     render() {
         return (
@@ -119,7 +119,7 @@ browserRouter() {
 
 
 - **html中使用模板引擎**
-> 在客户端html模板中如果需要使用模板引擎，需要依赖使用`@umajs/plugin-views`插件;建议和`nunjucks`搭配使用。[参考demo](https://github.com/Umajs/umajs-react-ssr/tree/master/client/pages/template)
+> 在客户端html模板中如果需要使用模板引擎，需要依赖使用`@umajs/plugin-views`插件;建议和`nunjucks`搭配使用。[参考demo](https://github.com/Umajs/umajs-react-ssr/tree/master/web/pages/template)
 ```js
 // plugin.config.ts
 views: {
@@ -145,12 +145,12 @@ Result.reactView('template',{msg:"This is the template text！",title:'hi,umajs-
 </body>
 ```
 
-# 部署
-> 在部署生产环境之前，需要提前编译好客户端bundle文件，否则线上首次访问时会耗时比较长，影响用户体验。编译脚本命令为`npx mininext build true`
+# 部署命令
+> 在部署生产环境之前，需要提前编译好客户端bundle文件，否则线上首次访问时会耗时比较长，影响用户体验。编译脚本命令为`npx srejs build`
 ```
 "scripts": {
     "dev": "ts-node-dev --respawn src/app.ts",
-    "build": "tsc && npx mininext build true",
+    "build": "tsc && npx srejs build",
     "prepublish": "npm run build",
     "prod": "node app/app.js --production"
   },
