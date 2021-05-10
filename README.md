@@ -1,5 +1,5 @@
 # @umajs/plugin-react-ssr
-> 针对Umajs提供React服务端渲染模式的开发插件，可以在`controller`和`middleware`中灵活使用react页面组件进行服务端渲染。插件基于[mini-next](https://github.com/dazjean/mini-next)进行封装；
+> 针对Umajs提供React服务端渲染模式的开发插件，可以在`controller`和`middleware`中灵活使用react页面组件进行服务端渲染。插件基于[srejs](https://github.com/dazjean/srejs)进行封装；
 
 # 特性
 - 支持多页面组件，各个页面构建bundle单独打包
@@ -52,34 +52,6 @@ export default function (props:typeProps){
         <div className ='ts-demo' >{say}</div>
     )
 }
-```
-
-
-- .babelrc配置
-> 应用配置依赖babel编译，babel插件和配置可按需开启和新增
-
-```js
-{
-    "presets":["@babel/react",[
-      "@babel/env",
-      {
-        "targets": {
-          "browsers": ["last 2 versions", "ie >= 7"]
-        }
-      }
-    ],
-    "@babel/preset-typescript"
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-runtime",
-        { "helpers": false, "regenerator": true }
-      ],
-      "@babel/plugin-transform-modules-commonjs",
-      "@babel/plugin-proposal-class-properties"
-    ]
-}
-
 ```
 
 # 使用

@@ -1,6 +1,6 @@
 import { IContext, TPlugin, Result as R, Uma, TPluginConfig } from '@umajs/core';
 import * as engineSource from 'consolidate';
-import MiniNext from 'mini-next';
+import Srejs from '@srejs/react';
 
 type TpluginOptions = {
     rootDir?:string,
@@ -27,9 +27,9 @@ export class Result extends R {
     }
 }
 const NODE_ENV = (process.env && process.env.NODE_ENV) || 'development';
-let MiniNextInstance;
+let SrejsInstance;
 
-/** 插件配置读取放到了mini-next框架中进行兼容，在生产环境部署前构建阶段不会执行插件 */
+/** 插件配置读取放到了@srejs/react框架中进行兼容，在生产环境部署前构建阶段不会执行插件 */
 let opt:TpluginOptions = Uma.config?.ssr || {}; // ssr.config.ts
 const reactSsrPlugin = <TPluginConfig>Uma.config?.plugin['react-ssr'];
 
@@ -45,13 +45,13 @@ if (opt.hasOwnProperty('defaultRouter')) {
 }
 
 try {
-    MiniNextInstance = new MiniNext(Uma.app, NODE_ENV === 'development', defaultRouter, opt);
+    SrejsInstance = new Srejs(Uma.app, NODE_ENV === 'development', defaultRouter, opt);
 } catch (error) {
     console.error(error);
 }
 
 const renderView = async (ctx, viewName, initProps, options) => {
-    let html = await MiniNextInstance.render(ctx, viewName, initProps, options);
+    let html = await SrejsInstance.render(ctx, viewName, initProps, options);
 
     const viewPlugin = <TPluginConfig>Uma.config?.plugin.views; // use @umajs/plugin-views
 

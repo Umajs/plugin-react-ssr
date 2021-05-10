@@ -8,19 +8,19 @@ module.exports = {
     rules: {
         // allow debugger during development
         'linebreak-style': 0,
-        'indent': [2, 4, {
-            'SwitchCase': 1
+        indent: [2, 4, {
+            SwitchCase: 1,
         }],
-        'max-len': [2, { 'code': 160, 'ignoreUrls': true }],
-        'radix': ['error', 'as-needed'],
+        'max-len': [2, { code: 160, ignoreUrls: true }],
+        radix: ['error', 'as-needed'],
         'object-shorthand': ['error', 'methods'],
-        'no-unused-expressions': ["error", {
-            "allowShortCircuit": true
+        'no-unused-expressions': ['error', {
+            allowShortCircuit: true,
         }],
         'no-bitwise': ['error', {
-            'allow': ['~']
+            allow: ['~'],
         }],
-        "import/extensions": 0,
+        'import/extensions': 0,
         'import/no-unresolved': 0,
         'import/prefer-default-export': 0,
         'import/no-dynamic-require': 0,
@@ -47,14 +47,14 @@ module.exports = {
         'no-debugger': 0,
         'no-console': 0,
         'no-bitwise': 0,
-        "padding-line-between-statements": [
-            "warn",
-            { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
-            { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] },
-            { "blankLine": "always", "prev": "*", "next": "return" },
-            { "blankLine": "always", "prev": "block-like", "next": "*" },
-            { "blankLine": "always", "prev": "block", "next": "*" },
-            { "blankLine": "always", "prev": "function", "next": "*" },
+        'padding-line-between-statements': [
+            'warn',
+            { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+            { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
+            { blankLine: 'always', prev: '*', next: 'return' },
+            { blankLine: 'always', prev: 'block-like', next: '*' },
+            { blankLine: 'always', prev: 'block', next: '*' },
+            { blankLine: 'always', prev: 'function', next: '*' },
         ],
-    }
-}
+    },
+};
