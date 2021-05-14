@@ -28,7 +28,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@srejs/react": "^0.0.3",
+    "@srejs/react": "^0.0.4",
     "@umajs/core": "^1.2.1",
     "consolidate": "^0.16.0"
   },
