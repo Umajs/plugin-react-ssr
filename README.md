@@ -1,5 +1,5 @@
 # @umajs/plugin-react-ssr
-> 针对Umajs提供React服务端渲染模式的开发插件，可以在`controller`和`middleware`中灵活使用react页面组件进行服务端渲染。插件基于[srejs](https://github.com/dazjean/srejs)进行封装；
+> 针对Umajs提供React服务端渲染模式的开发插件，可以在`controller`和`middleware`中灵活使用react页面组件进行服务端渲染。插件基于服务端渲染骨架工具[Srejs](https://github.com/dazjean/srejs)开发，更多使用请查看[文档](https://github.com/dazjean/srejs)；
 
 # 特性
 - 支持多页面组件，各个页面构建bundle单独打包
