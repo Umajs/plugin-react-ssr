@@ -7,7 +7,7 @@
 - 支持多页面组件，各个页面构建bundle单独打包
 - 不默认路由，路由通过controller调用reactView模板引擎渲染
 - 提供原始React+webpack原始配置方法
-- 支持getInitProps钩子函数和服务端传递Props两种预数据处理方式
+- 支持服务端初始数据【推荐】和静态方法getInitProps两种预数据处理方式
 - 轻量级，客户端不依赖任何框架API
 - 支持SSR,CSR两种渲染模式灵活切换
 - SSR缓存
@@ -22,7 +22,8 @@
         'react-ssr': {
             enable:true,
             options:{
-                rootDir:'web',
+                rootDir:'web', // 客户端页面组件根文件夹
+                rootNode:'app', // 客户端页面挂载根元素ID
                 ssr: true, // 全局开启服务端渲染
                 cache: false, // 全局使用服务端渲染缓存 开发环境设置true无效
             }
@@ -59,12 +60,13 @@ export default function (props:typeProps){
 # 使用
 >  插件扩展了`Umajs`中提供的统一返回处理`Result`方法，新增了`reactView`页面组件可在`controller`自由调用,方式类似传统模板引擎使用方法；也同时将方法挂载到了koa中间件中的`ctx`对象上；当一些公关的页面组件，比如404、异常提示页面、登录或者需要在中间件中拦截跳转时可以在`middleware`中调用。
 ```ts
-type TssrOption = {
-    cache:boolean, // 开启缓存 默认false 开发环境设置true无效
-    ssr:boolean // 开启服务端渲染 默认true
-};
-Result.reactView(viewName:string,initProps?:object,options?:TssrOption);
-ctx.reactView(viewName:string,initProps?:object,options?:TssrOption);
+interface TviewOptions{
+    ssr?: boolean, // 全局开启服务端渲染
+    cache?: boolean, // 全局使用服务端渲染缓存
+    useEngine?:boolean // 渲染自定义html的页面组件时，选择性开启使用模板引擎
+}
+Result.reactView(viewName:string,initProps?:object,options?:TviewOptions);
+ctx.reactView(viewName:string,initProps?:object,options?:TviewOptions);
 ```
 **如果options参数传递为空 则默认会使用全局配置属性，全局配置采用插件集成时传递的options参数**
 
@@ -121,7 +123,7 @@ browserRouter() {
 
 
 - **html中使用模板引擎**
-> 在客户端html模板中如果需要使用模板引擎，需要依赖使用`@umajs/plugin-views`插件;建议和`nunjucks`搭配使用。[参考demo](https://github.com/Umajs/umajs-react-ssr/tree/master/web/pages/template)
+> 在SEO场景时，需要动态修改页面的标题和关键字等信息时，我们可以在自定义html中使用模板引擎语法，此方案需要先开启使用`@umajs/plugin-views`插件;建议和`nunjucks`搭配使用。[参考demo](https://github.com/Umajs/umajs-react-ssr/tree/master/web/pages/template)。
 ```js
 // plugin.config.ts
 views: {
@@ -136,8 +138,8 @@ views: {
         },
     },
 
-// controller
-Result.reactView('template',{msg:"This is the template text！",title:'hi,umajs-react-ssr'},{cache:false});
+// controller中调用时开启使用模板引擎标识，为提高性能，对未动态修改模板数据的页面组件不要设置此属性
+Result.reactView('template',{msg:"This is the template text！",title:'hi,umajs-react-ssr'},{cache:false,useEngine:true});
 
 // html
 <body>
@@ -148,8 +150,8 @@ Result.reactView('template',{msg:"This is the template text！",title:'hi,umajs-
 ```
 
 # 部署命令
-> 在部署生产环境之前，需要提前编译好客户端bundle文件，否则线上首次访问时会耗时比较长，影响用户体验。编译脚本命令为`npx srejs build`
-```
+> 在部署生产环境之前，客户端代码需要提前编译。否则线上首次访问时会耗时比较长，影响用户体验。编译脚本命令为`npx srejs build`
+```js
 "scripts": {
     "dev": "ts-node-dev --respawn src/app.ts",
     "build": "tsc && npx srejs build",
