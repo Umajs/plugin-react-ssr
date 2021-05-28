@@ -1,5 +1,6 @@
 import { IContext, TPlugin, Result as R, Uma, TPluginConfig } from '@umajs/core';
 import * as engineSource from 'consolidate';
+import * as getStream from 'get-stream';
 import Srejs from '@srejs/react';
 
 interface TviewOptions{
@@ -70,6 +71,11 @@ const renderView = async (ctx:IContext, viewName:string, initProps?:any, options
         console.assert(engineName, '@umajs/plugin-views must be setting; eg====>  map:{html:"nunjucks"}');
         const engine = engineSource[engineName];
         const state = { ...options, ...ctx.state || {}, ...initProps };
+
+        if (typeof html === 'object' && html.readable && options.cache) {
+            // when cache model ,html return a file stream
+            html = await getStream(html);
+        }
 
         html = await engine.render(html, state);
     }
