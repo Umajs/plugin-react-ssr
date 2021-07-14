@@ -23,7 +23,32 @@ interface IReactViewParms{
     options:TviewOptions
 }
 export class Result extends R {
+    /**
+     * @deprecated 请使用Result.react()函数渲染页面
+     * @param viewName
+     * @param initProps
+     * @param options
+     * @returns
+     */
     static reactView(viewName: string, initProps?: any, options?:TviewOptions) {
+        return new Result({
+            type: 'reactView',
+            data: {
+                viewName,
+                initProps,
+                options,
+            },
+        });
+    }
+
+    /**
+     *
+     * @param viewName 页面组件名称
+     * @param initProps react页面组件初始化props
+     * @param options 页面运行配置参数
+     * @returns
+     */
+    static react(viewName: string, initProps?: any, options?:TviewOptions) {
         return new Result({
             type: 'reactView',
             data: {
@@ -39,7 +64,7 @@ let SrejsInstance;
 
 /** 插件配置读取放到了@srejs/react框架中进行兼容，在生产环境部署前构建阶段不会执行插件 */
 let opt:TssrPluginOptions = Uma.config?.ssr || {}; // ssr.config.ts
-const reactSsrPlugin = <TPluginConfig>Uma.config?.plugin['react-ssr'];
+const reactSsrPlugin = <TPluginConfig>Uma.config?.plugin?.react || <TPluginConfig>Uma.config?.plugin['react-ssr'];
 
 if (reactSsrPlugin?.options) {
     opt = reactSsrPlugin.options;
@@ -97,7 +122,16 @@ export default (): TPlugin => ({
         },
     },
     context: {
+        /**
+         * @deprecated  请使用ctx.react()函数渲染页面
+         * @param viewName
+         * @param initProps
+         * @param options
+         */
         async reactView(viewName:string, initProps?:any, options?:TviewOptions) {
+            await renderView(this, viewName, initProps, options);
+        },
+        async react(viewName:string, initProps?:any, options?:TviewOptions) {
             await renderView(this, viewName, initProps, options);
         },
     },
