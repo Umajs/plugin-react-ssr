@@ -1,6 +1,6 @@
 {
   "name": "@umajs/plugin-react-ssr",
-  "version": "1.2.0-alpha.2",
+  "version": "1.2.0",
   "description": "umajs react ssr",
   "author": "zunyi_zjj@163.com",
   "license": "MIT",
@@ -28,8 +28,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@srejs/react": "^1.0.0-alpha.2",
-    "@umajs/core": "^1.2.1",
+    "@srejs/react": "^1.0.0",
     "consolidate": "^0.16.0",
     "get-stream": "^6.0.1"
   },
@@ -38,6 +37,7 @@
     "@types/node": "^12.12.9",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
+    "@umajs/core": "^1.2.1",
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
