@@ -1,6 +1,6 @@
 {
   "name": "@umajs/plugin-react-ssr",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "umajs react ssr",
   "author": "zunyi_zjj@163.com",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@srejs/react": "^1.0.0",
+    "@srejs/react": "^1.0.1",
     "consolidate": "^0.16.0",
     "get-stream": "^6.0.1"
   },
