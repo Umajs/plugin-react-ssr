@@ -6,8 +6,9 @@ import Srejs from '@srejs/react';
 interface TviewOptions{
     ssr?: boolean, // 全局开启服务端渲染
     cache?: boolean, // 全局使用服务端渲染缓存
-    useEngine?: boolean // 渲染自定义html的页面组件时，选择性开启使用模板引擎
-    baseName?: string // 动态修改嵌套路由的basename 默认为页面组件名称。eg:/router
+    useEngine?: boolean, // 渲染自定义html的页面组件时，选择性开启使用模板引擎
+    baseName?: string, // 动态修改嵌套路由的basename 默认为页面组件名称。eg:/router
+    layout?: boolean // 是否启用页面整体布局(默认为true), 开启后可在web/layout目录下编写布局代码.
 }
 
 export interface TssrPluginOptions extends TviewOptions {
