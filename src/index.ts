@@ -86,7 +86,8 @@ try {
 }
 
 const renderView = async (ctx:IContext, viewName:string, initProps?:any, options?:TviewOptions) => {
-    let html = await SrejsInstance.render(ctx, viewName, initProps, options);
+    const mergeProps = Object.assign(ctx.state || {}, initProps)
+    let html = await SrejsInstance.render(ctx, viewName, mergeProps, options);
 
     const viewPlugin = <TPluginConfig>Uma.config?.plugin.views; // use @umajs/plugin-views
 
@@ -97,7 +98,7 @@ const renderView = async (ctx:IContext, viewName:string, initProps?:any, options
 
         console.assert(engineName, '@umajs/plugin-views must be setting; eg====>  map:{html:"nunjucks"}');
         const engine = engineSource[engineName];
-        const state = { ...options, ...ctx.state || {}, ...initProps };
+        const state = { ...options, ...mergeProps };
 
         if (typeof html === 'object' && html.readable && options.cache) {
             // when cache model ,html return a file stream
