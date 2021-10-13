@@ -86,7 +86,7 @@ try {
 }
 
 const renderView = async (ctx:IContext, viewName:string, initProps?:any, options?:TviewOptions) => {
-    const mergeProps = Object.assign(ctx.state || {}, initProps)
+    const mergeProps = Object.assign(ctx.state || {}, initProps);
     let html = await SrejsInstance.render(ctx, viewName, mergeProps, options);
 
     const viewPlugin = <TPluginConfig>Uma.config?.plugin.views; // use @umajs/plugin-views
