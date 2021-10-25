@@ -1,6 +1,6 @@
 {
   "name": "@umajs/plugin-react-ssr",
-  "version": "1.2.8",
+  "version": "2.0.0-alpha.0",
   "description": "In umajs, React is used to develop the plug-in of spa and MPa, which supports server-side rendering and client-side rendering",
   "author": "zunyi_zjj@163.com",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "index.d.ts"
   ],
   "publishConfig": {
-    "registry": "http://registry.npmjs.org",
+    "registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "scripts": {
@@ -37,7 +37,7 @@
     "@types/node": "^12.12.9",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
-    "@umajs/core": "^1.2.1",
+    "@umajs/core": "^2.0.1-alpha.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",

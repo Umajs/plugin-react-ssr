@@ -24,7 +24,7 @@ interface IReactViewParms{
     initProps : any,
     options:TviewOptions
 }
-export class Result extends R {
+export class Result<T> extends R<T> {
     /**
      * @deprecated 请使用Result.react()函数渲染页面
      * @param viewName
