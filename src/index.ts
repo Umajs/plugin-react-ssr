@@ -85,7 +85,7 @@ try {
     console.error(error);
 }
 
-const renderView = async (ctx:IContext, viewName:string, initProps?:any, options?:TviewOptions) => {
+const renderDom = async (ctx:IContext, viewName:string, initProps?:any, options?:TviewOptions) => {
     const mergeProps = Object.assign(ctx.state || {}, initProps);
     let html = await SrejsInstance.render(ctx, viewName, mergeProps, options);
 
@@ -107,6 +107,12 @@ const renderView = async (ctx:IContext, viewName:string, initProps?:any, options
 
         html = await engine.render(html, state);
     }
+
+    return html;
+};
+
+const renderView = async (ctx: IContext, viewName: string, initProps?: any, options?: TviewOptions) => {
+    const html = await renderDom(ctx, viewName, initProps, options);
 
     ctx.type = 'text/html';
     ctx.body = html;
@@ -136,6 +142,9 @@ export default (): TPlugin => ({
         },
         async react(viewName:string, initProps?:any, options?:TviewOptions) {
             await renderView(this, viewName, initProps, options);
+        },
+        async reactDom(viewName:string, initProps?:any, options?:TviewOptions): Promise<string> {
+            return await renderDom(this, viewName, initProps, options);
         },
     },
 
