@@ -16,7 +16,8 @@ export interface TssrPluginOptions extends TviewOptions {
     rootNode?:string, // 客户端页面挂载根元素ID
     defaultRouter?:boolean, // 开启默认文件路由
     prefixCDN?:string, // 构建后静态资源CDN地址前缀
-    prefixRouter?:string // 默认页面路由前缀(在defaultRouter设置为true时有效)
+    prefixRouter?: string, // 默认页面路由前缀(在defaultRouter设置为true时有效)
+    isQiankun?: boolean // 是否以qiankun子系统形式注入
 }
 
 interface IReactViewParms{
