@@ -1,6 +1,6 @@
 {
   "name": "@umajs/plugin-react-ssr",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "In umajs, React is used to develop the plug-in of SPA and MPA, which supports server-side rendering and client-side rendering",
   "author": "zunyi_zjj@163.com",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@srejs/react": "^1.3.3",
+    "@srejs/react": "^1.3.4",
     "consolidate": "^0.16.0",
     "get-stream": "^6.0.1"
   },
