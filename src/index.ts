@@ -90,8 +90,17 @@ const renderDom = async (ctx:IContext, viewName:string, initProps?:any, options?
     let html = await SrejsInstance.render(ctx, viewName, mergeProps, options);
 
     const viewPlugin = <TPluginConfig>Uma.config?.plugin.views; // use @umajs/plugin-views
+    const ssrConfig = <TPluginConfig>Uma.config?.plugin['react-ssr'];
 
-    if (viewPlugin?.enable && options.useEngine) {
+    let useEngine = false;
+
+    if (typeof (options?.useEngine) === 'boolean') {
+        useEngine = options?.useEngine;
+    } else {
+        useEngine = ssrConfig?.options?.useEngine;
+    }
+
+    if (viewPlugin?.enable && useEngine) {
         const { opts } = viewPlugin.options;
         const { map } = opts;
         const engineName = map?.html;
