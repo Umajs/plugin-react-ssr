@@ -114,7 +114,16 @@ const renderDom = async (ctx:IContext, viewName:string, initProps?:any, options?
             html = await getStream(html);
         }
 
-        html = await engine.render(html, state);
+        // 在SSR模式中, 将__SSR_DATA_匹配出来, 避免其中内容被模板引擎执行, 避免注入类攻击
+        const ssrReg = new RegExp(/<script[^>]*>window.__SSR_DATA__=([\s\S]*?)<\/script>/)
+        const placeholderStr = '<!--plAcehoLder-->'
+        const ssrScriptStr = html.match?.(ssrReg)?.[0] || ''
+        const renderHtml = html.replace(ssrReg, placeholderStr) // without ssr script
+
+        // engine rendering
+        html = await engine.render(renderHtml, state);
+        // final result
+        html = html.replace(placeholderStr, ssrScriptStr)
     }
 
     return html;
